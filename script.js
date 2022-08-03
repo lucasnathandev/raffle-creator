@@ -35,7 +35,6 @@ function showWinner(tag) {
 
   const winner = document.createElement("span")
   winner.textContent = ` ${tag.textContent}`
-  console.log(winner.textContent)
 
   lucky.appendChild(winner)
 }
@@ -55,14 +54,12 @@ function raffle(times) {
     setTimeout(() => {
       removeHighlightClass(randomTag)
       auxTimes > 1 ? auxTimes-- : auxTimes++
-      console.log(speed())
     }, speed() - 100)
   }, speed())
   setTimeout(() => {
     clearInterval(interval)
     setTimeout(() => {
       const randomTag = getRandomTag()
-      console.log(randomTag)
       addHighlightClass(randomTag)
       lucky(randomTag)
     }, speed())
@@ -78,7 +75,6 @@ function main() {
     updateTagContainer(validated)
     if (e.key === "Enter") {
       clearInput(e.target)
-      console.log(validated.length)
       raffle(validated.length)
     }
   }
