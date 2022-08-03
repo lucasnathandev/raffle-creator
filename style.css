@@ -27,6 +27,7 @@ h3 {
 }
 
 .lucky {
+  display: none;
   position: relative;
   top: -20px;
   color: #aefa9e;

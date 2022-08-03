@@ -30,9 +30,12 @@ function lucky(tag) {
 
 function showWinner(tag) {
   const lucky = document.querySelector(".lucky")
+  lucky.innerHTML = "Winner:"
+  lucky.style.display = "block"
 
   const winner = document.createElement("span")
   winner.textContent = ` ${tag.textContent}`
+  console.log(winner.textContent)
 
   lucky.appendChild(winner)
 }
@@ -65,9 +68,24 @@ function raffle(times) {
     }, speed())
   }, times * 100)
 }
-
 function main() {
+  let first = true
   // Local functions definition
+
+  function textAreaEvents(e) {
+    const tagsText = createTags(e.target.value)
+    const validated = Array.from(new Set(tagsText))
+    updateTagContainer(validated)
+    if (e.key === "Enter") {
+      clearInput(e.target)
+      console.log(validated.length)
+      raffle(validated.length)
+    }
+  }
+
+  function begin() {
+    textArea.addEventListener("keyup", textAreaEvents)
+  }
 
   function updateTagContainer(tags) {
     const tagContainer = document.querySelector("#tags")
@@ -77,16 +95,7 @@ function main() {
     }, "")
   }
 
-  textArea.addEventListener("keyup", (e) => {
-    const tagsText = createTags(e.target.value)
-    const validated = Array.from(new Set(tagsText))
-    updateTagContainer(validated)
-    if (e.key === "Enter") {
-      clearInput(e.target)
-      console.log(validated.length)
-      raffle(validated.length)
-    }
-  })
+  begin()
 }
 
 main()
